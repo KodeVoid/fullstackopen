@@ -1,0 +1,32 @@
+sequenceDiagram
+    participant Browser
+    participant Server
+
+    Browser ->> Server: POST /exampleapp/new-note
+    activate Server
+    Server -->> Browser: 302 Redirect to /exampleapp/notes
+    deactivate Server
+
+    Browser ->> Server: GET /exampleapp/notes
+    activate Server
+    Server -->> Browser: HTML document
+    deactivate Server
+
+    Browser ->> Server: GET /exampleapp/main.css
+    activate Server
+    Server -->> Browser: CSS file
+    deactivate Server
+
+    Browser ->> Server: GET /exampleapp/main.js
+    activate Server
+    Server -->> Browser: JavaScript file
+    deactivate Server
+
+    Note right of Browser: JS executes and fetches the note data from the server
+
+    Browser ->> Server: GET /exampleapp/data.json
+    activate Server
+    Server -->> Browser: JSON data (e.g. [{ "content": "HTML is easy", "date": "2023-1-1" }, ...])
+    deactivate Server
+
+    Note right of Browser: Callback function runs and renders the notes in the DOM
